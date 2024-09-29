@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  # Backend (Node.js API)
+  backend:
+    build: ./backend
+    container_name: backend
+    ports:
+      - '5000:5000'
+    networks:
+      - webnet
+    environment:
+      - NODE_ENV=production
+    depends_on:
+      - frontend
+
+  # Frontend (React App)
+  frontend:
+    build: ./frontend
+    container_name: frontend
+    ports:
+      - '80:80'
+    networks:
+      - webnet
+
+networks:
+  webnet:
